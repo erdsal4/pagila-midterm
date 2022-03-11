@@ -4,3 +4,10 @@
  * NOTE:
  * Your results should not contain any duplicate titles.
  */
+SELECT title, name, rating
+FROM film
+JOIN film_category USING (film_id)
+JOIN category USING (category_id)
+WHERE category.name='Children'
+  AND (rating='R' OR rating='NC-17')
+ORDER BY title;
