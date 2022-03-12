@@ -6,7 +6,7 @@
  * You're where clause must include a condition using the "first_name" and "last_name" fields of the "actor" table.
  */
 WITH bacall_films AS (
-	SELECT title, actor_id
+	SELECT title
 	FROM film
 	JOIN film_actor USING (film_id)
 	JOIN actor USING (actor_id)
@@ -21,4 +21,4 @@ SELECT count(*) FROM (
 	JOIN film USING (film_id)
 	WHERE film.title IN (SELECT title from bacall_films)
 	ORDER BY customer.first_name,customer.last_name
-) t;
+)t ;

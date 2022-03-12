@@ -16,14 +16,14 @@ WITH title_f AS (
 	WHERE title LIKE '%F%'
 ),
 actor_f AS (
-	SELECT title, first_name || ' ' || last_name as name
+	SELECT title, first_name, last_name
 	FROM actor
 	JOIN film_actor USING (actor_id)
 	JOIN film USING (film_id)
 	WHERE first_name LIKE '%F%' OR last_name LIKE '%F%'
 ),
 customer_f AS (
-	SELECT title, first_name || ' ' || last_name as name
+	SELECT title, first_name, last_name
 	FROM customer
 	JOIN rental USING (customer_id)
 	JOIN inventory USING (inventory_id)

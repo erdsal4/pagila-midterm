@@ -15,18 +15,18 @@
  * NOTE:
  * You do not have to include movies with similarity score 0 in your results (but you may if you like).
  */
-SELECT t.ttitle, count(t.ttitle)
-FROM( 
-	SELECT DISTINCT f1.title, f2.title as ttitle, first_name || ' ' || last_name as name
-FROM customer c
-JOIN rental r1 ON (c.customer_id=r1.customer_id)
-JOIN rental r2 ON (r1.customer_id = r2.customer_id)
-JOIN inventory i1 ON (r1.inventory_id=i1.inventory_id)
-JOIN inventory i2 ON (r2.inventory_id = i2.inventory_id)
-JOIN film f1 ON (i1.film_id=f1.film_id)
-JOIN film f2 ON (i2.film_id=f2.film_id)
-WHERE f1.title='AMERICAN CIRCUS'
-  AND NOT f2.title='AMERICAN CIRCUS'
+SELECT t.title, count(t.title) as score
+FROM ( 
+	SELECT DISTINCT f2.title as title, first_name || ' ' || last_name as name
+	FROM customer c
+	JOIN rental r1 ON (c.customer_id=r1.customer_id)
+	JOIN rental r2 ON (r1.customer_id = r2.customer_id)
+	JOIN inventory i1 ON (r1.inventory_id=i1.inventory_id)
+	JOIN inventory i2 ON (r2.inventory_id = i2.inventory_id)
+	JOIN film f1 ON (i1.film_id=f1.film_id)
+	JOIN film f2 ON (i2.film_id=f2.film_id)
+	WHERE f1.title='AMERICAN CIRCUS'
+	  AND NOT f2.title='AMERICAN CIRCUS'
 ) t
-GROUP BY(t.ttitle)
-ORDER BY count(t.ttitle) DESC
+GROUP BY(t.title)
+ORDER BY count(t.title) DESC;

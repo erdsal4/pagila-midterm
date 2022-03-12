@@ -4,7 +4,7 @@
  * NOTE:
  * Your results should not contain any duplicate titles.
  */
-SELECT title, name, rating
+SELECT title
 FROM film
 JOIN film_category USING (film_id)
 JOIN category USING (category_id)
